@@ -5,11 +5,11 @@ for different timezones in a customizable format.
 """
 
 from datetime import datetime
-from typing import Optional, Any
+from typing import Any, Optional
 
-import customtkinter as ctk
+import customtkinter as ctk  # type: ignore
 import pytz
-from pytz.tzinfo import DstTzInfo, BaseTzInfo
+from pytz.tzinfo import BaseTzInfo, DstTzInfo  # type: ignore
 
 
 class TimeFrame(ctk.CTkFrame):
@@ -30,7 +30,7 @@ class TimeFrame(ctk.CTkFrame):
         title: str,
         time_format: str = "%H:%M:%S",
         date_format: str = "%B %d, %Y",
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """Initialize the time frame with title and display labels.
 
@@ -41,7 +41,7 @@ class TimeFrame(ctk.CTkFrame):
             date_format (str, optional): Format string for date display. Defaults to "%B %d, %Y".
             **kwargs: Additional keyword arguments for the frame
         """
-        super().__init__(master, **kwargs)
+        super().__init__(master, **kwargs) # type: ignore
 
         # Store format strings
         self.time_format: str = time_format
@@ -51,15 +51,15 @@ class TimeFrame(ctk.CTkFrame):
         self.header = ctk.CTkLabel(
             self, text=title, font=("Helvetica", 16, "bold")
         )
-        self.header.pack(pady=5)
+        self.header.pack(pady=5) # type: ignore
 
         # Time display with larger font
         self.time_label = ctk.CTkLabel(self, text="", font=("Helvetica", 36))
-        self.time_label.pack()
+        self.time_label.pack() # type: ignore
 
         # Date display with medium font
         self.date_label = ctk.CTkLabel(self, text="", font=("Helvetica", 20))
-        self.date_label.pack(pady=(0, 5))
+        self.date_label.pack(pady=(0, 5)) # type: ignore
 
     def update_time(self, time_obj: datetime) -> None:
         """Update the time and date display with the given datetime object.
@@ -71,13 +71,13 @@ class TimeFrame(ctk.CTkFrame):
             ValueError: If time_obj is not a valid datetime object
         """
         try:
-            self.time_label.configure(text=time_obj.strftime(self.time_format))
-            self.date_label.configure(text=time_obj.strftime(self.date_format))
+            self.time_label.configure(text=time_obj.strftime(self.time_format)) # type: ignore
+            self.date_label.configure(text=time_obj.strftime(self.date_format)) # type: ignore
         except Exception as e:
             # Log error and show error state
             print(f"Error updating time display: {e}")
-            self.time_label.configure(text="--:--:--")
-            self.date_label.configure(text="Error")
+            self.time_label.configure(text="--:--:--") # type: ignore
+            self.date_label.configure(text="Error") # type: ignore
 
 
 class ClockDisplay:
@@ -125,7 +125,7 @@ class ClockDisplay:
                 time_format=time_format,
                 date_format=date_format,
             )
-            self.local_frame.pack(pady=10, padx=20, fill="x")
+            self.local_frame.pack(pady=10, padx=20, fill="x") # type: ignore
         except Exception as e:
             print(f"Error creating local time frame: {e}")
             self.local_frame = None
@@ -140,7 +140,7 @@ class ClockDisplay:
                     time_format=time_format,
                     date_format=date_format,
                 )
-                self.est_frame.pack(pady=10, padx=20, fill="x")
+                self.est_frame.pack(pady=10, padx=20, fill="x") # type: ignore
             except Exception as e:
                 print(f"Error creating EST time frame: {e}")
 
@@ -165,7 +165,7 @@ class ClockDisplay:
                     print(f"Error updating EST time: {e}")
                     # Reset EST frame on error
                     if self.est_frame:
-                        self.est_frame.time_label.configure(text="--:--:--")
-                        self.est_frame.date_label.configure(text="Error")
+                        self.est_frame.time_label.configure(text="--:--:--") # type: ignore
+                        self.est_frame.date_label.configure(text="Error") # type: ignore
         except Exception as e:
             print(f"Error in clock update: {e}")

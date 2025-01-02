@@ -3,14 +3,15 @@
 This module contains the main application window class that manages the UI and license state.
 """
 
-from typing import Optional, Literal
-import customtkinter as ctk
+from typing import Literal, Optional
+
+import customtkinter as ctk  # type: ignore
 
 from ui.clock_display import ClockDisplay
 from utils.license_manager import LicenseManager
 
 
-class App(ctk.CTk):
+class App(ctk.CTk): # type: ignore
     """Main application window with license management functionality.
 
     This class handles the main application window, including license management,
@@ -23,7 +24,7 @@ class App(ctk.CTk):
 
     def __init__(self) -> None:
         """Initialize the main application window with default settings."""
-        super().__init__()
+        super().__init__() # type: ignore
 
         self.title("Multi-Timezone Clock @Mrjxtr")
         self.geometry("400x400")
@@ -72,7 +73,7 @@ class App(ctk.CTk):
             status_label = ctk.CTkLabel(
                 master=self, text=status_text, font=("Helvetica", 14, "bold")
             )
-            status_label.pack(pady=10)
+            status_label.pack(pady=10) # type: ignore
 
             # Setup clock display with license-based features
             is_licensed: bool = "Licensed" in status_text
@@ -104,12 +105,12 @@ class App(ctk.CTk):
     def add_activation_ui(self) -> None:
         """Add license activation UI elements with input validation."""
         license_frame = ctk.CTkFrame(self)
-        license_frame.pack(pady=20, padx=20, fill="x")
+        license_frame.pack(pady=20, padx=20, fill="x") # type: ignore
 
         license_entry = ctk.CTkEntry(
             master=license_frame, placeholder_text="Enter License Key", width=200
         )
-        license_entry.pack(pady=10, padx=10, fill="x")
+        license_entry.pack(pady=10, padx=10, fill="x") # type: ignore
 
         # Add validation and activation button
         activate_btn = ctk.CTkButton(
@@ -117,7 +118,7 @@ class App(ctk.CTk):
             text="Activate License",
             command=lambda: self.activate_license(license_entry.get().strip()),
         )
-        activate_btn.pack(pady=10)
+        activate_btn.pack(pady=10) # type: ignore
 
     def activate_license(self, license_key: str) -> None:
         """Handle license activation with input validation.
@@ -146,7 +147,7 @@ class App(ctk.CTk):
         error_label = ctk.CTkLabel(
             master=self, text=message, text_color="red", font=("Helvetica", 12)
         )
-        error_label.pack(pady=10)
+        error_label.pack(pady=10) # type: ignore
         # Auto-remove error message after 3 seconds
         self.after(3000, error_label.destroy)
 
@@ -158,7 +159,7 @@ class App(ctk.CTk):
             font=("Helvetica", 16, "bold"),
             text_color="red",
         )
-        label.pack(pady=20)
+        label.pack(pady=20) # type: ignore
 
         info_label = ctk.CTkLabel(
             master=self,
@@ -166,7 +167,7 @@ class App(ctk.CTk):
             wraplength=300,
             font=("Helvetica", 12),
         )
-        info_label.pack(pady=10)
+        info_label.pack(pady=10) # type: ignore
 
         self.add_activation_ui()
 
@@ -178,7 +179,7 @@ class App(ctk.CTk):
             font=("Helvetica", 16, "bold"),
             text_color="red",
         )
-        label.pack(pady=20)
+        label.pack(pady=20) # type: ignore
 
         info_label = ctk.CTkLabel(
             master=self,
@@ -186,7 +187,7 @@ class App(ctk.CTk):
             wraplength=300,
             font=("Helvetica", 12),
         )
-        info_label.pack(pady=10)
+        info_label.pack(pady=10) # type: ignore
 
     def setup_error_ui(self, error_message: str) -> None:
         """Setup error UI when unexpected errors occur.
@@ -200,9 +201,9 @@ class App(ctk.CTk):
             font=("Helvetica", 16, "bold"),
             text_color="red",
         )
-        label.pack(pady=20)
+        label.pack(pady=20) # type: ignore
 
         error_label = ctk.CTkLabel(
             master=self, text=error_message, wraplength=300, font=("Helvetica", 12)
         )
-        error_label.pack(pady=10)
+        error_label.pack(pady=10) # type: ignore
