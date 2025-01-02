@@ -1,0 +1,7 @@
+customtkinter==5.2.2
+darkdetect==0.8.0
+packaging==24.2
+python-dotenv==1.0.1
+pytz==2024.2
+setuptools==75.1.0
+wheel==0.44.0

@@ -1,0 +1,10 @@
+# folders
+.venv/
+__pycache__/
+vscode/
+
+# files
+*code-workspace
+
+# environments
+.env
