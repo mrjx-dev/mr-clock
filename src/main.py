@@ -6,7 +6,7 @@ It initializes and runs the main application window with error handling.
 
 import sys
 import traceback
-from typing import NoReturn
+from typing import NoReturn, Any
 
 from ui.app import App
 
@@ -27,7 +27,7 @@ def handle_exception(
     Note
         In production, you might want to log errors to a file or error tracking service.
     """
-    error_msg = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
+    error_msg: Any = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
     print(f"An error occurred:\n{error_msg}", file=sys.stderr)
     sys.exit(1)
 

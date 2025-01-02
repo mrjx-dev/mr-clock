@@ -5,6 +5,7 @@ vscode/
 
 # files
 *code-workspace
+license_data.json
 
 # environments
 .env
